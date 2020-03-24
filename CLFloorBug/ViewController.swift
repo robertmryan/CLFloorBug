@@ -59,7 +59,7 @@ private extension ViewController {
             latitudeLabel.text = nil
             longitudeLabel.text = nil
             altitudeLabel.text = nil
-            floorLabel.text = nil
+            floorLabel.text = "No location."
             return
         }
 
@@ -67,11 +67,11 @@ private extension ViewController {
         longitudeLabel.text = numberFormatter.string(for: location.coordinate.longitude)
         altitudeLabel.text = numberFormatter.string(for: location.altitude)
 
-        if let level = locationManager.location?.floor?.level {
-            let hexString = "0x" + String(format: "%08x", level)
-            floorLabel.text = "\(level) (\(hexString))"
+        if let floor = location.floor {
+            let hexString = "0x" + String(format: "%08x", floor.level)
+            floorLabel.text = "\(floor.level) (\(hexString))"
         } else {
-            floorLabel.text = "No floor info."
+            floorLabel.text = "No floor."
         }
     }
 
